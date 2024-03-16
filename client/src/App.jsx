@@ -13,6 +13,7 @@ import SignIn from '../src/pages/SignIn'
 import Header from './components/Header';
 import Projects from '../src/pages/Projects';
 import FooterCom from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
 
 
 
@@ -22,7 +23,9 @@ export default function App() {
       <Header/>
       <Routes>
         <Route path='/'  element={<Home/>}/>
+        <Route element={<PrivateRoute/>}>
         <Route path='/dashboard'  element={<Dashboard/>}/>
+        </Route>
         <Route path='/signup'  element={<SignUp/>}/>
         <Route path='/signin'  element={<SignIn/>}/>
         <Route path='/about'  element={<About/>}/>
