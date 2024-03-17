@@ -19,3 +19,6 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) stack application for a 
 - **JWT (JSON Web Tokens)**: Used for secure authentication and authorization.
 - **Google OAuth**: Used for Google authentication.
 - **Bootstrap**: CSS framework for styling the frontend.
+
+## Deployed link
+[Click to see this blog app](https://mern-blog-app-drpu.onrender.com/])
