@@ -1,38 +1,44 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Routes
-} from "react-router-dom";
-import Home from '../src/pages/Home'
-import About from '../src/pages/About'
-import Dashboard from '../src/pages/Dashboard'
-import SignUp from '../src/pages/SignUp'
-import SignIn from '../src/pages/SignIn'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import SignIn from './pages/SignIn';
+import Dashboard from './pages/Dashboard';
+import Posts from './pages/Posts';
+import SignUp from './pages/SignUp';
 import Header from './components/Header';
-import Projects from '../src/pages/Projects';
-import FooterCom from './components/Footer';
+import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
-
-
+import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
+import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
+import PostPage from './pages/PostPage';
+import ScrollToTop from './components/ScrollToTop';
+import Search from './pages/Search';
 
 export default function App() {
   return (
-    <Router>
-      <Header/>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Header />
       <Routes>
-        <Route path='/'  element={<Home/>}/>
-        <Route element={<PrivateRoute/>}>
-        <Route path='/dashboard'  element={<Dashboard/>}/>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/search' element={<Search />} />
+        <Route element={<PrivateRoute />}>
+          <Route path='/dashboard' element={<Dashboard />} />
         </Route>
-        <Route path='/signup'  element={<SignUp/>}/>
-        <Route path='/signin'  element={<SignIn/>}/>
-        <Route path='/about'  element={<About/>}/>
-        <Route path='/projects'  element={<Projects/>}/>
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
+        </Route>
+
+        <Route path='/posts' element={<Posts />} />
+        <Route path='/post/:postSlug' element={<PostPage />} />
       </Routes>
-      <FooterCom/>
-    </Router>
-  )
+      <Footer />
+    </BrowserRouter>
+  );
 }
 

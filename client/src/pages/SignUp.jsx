@@ -1,27 +1,24 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signInSuccess,signInFailure,signInStart } from '../redux/user/userSlice';
-import {useDispatch,useSelector} from 'react-redux'
 import OAuth from '../components/OAuth';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
-
-  const {loading,error:errorMessage} = useSelector(state =>state.user)
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.username || !formData.email || !formData.password) {
-      return dispatch(signInFailure('Please fill all the fields'))
+      return setErrorMessage('Please fill out all fields.');
     }
     try {
-      dispatch(signInStart());
+      setLoading(true);
+      setErrorMessage(null);
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,18 +26,21 @@ export default function SignUp() {
       });
       const data = await res.json();
       if (data.success === false) {
-        dispatch(signInFailure(data.message))
+        return setErrorMessage(data.message);
       }
+      setLoading(false);
       if(res.ok) {
-        navigate('/signin');
+        navigate('/sign-in');
       }
     } catch (error) {
-      dispatch(signInFailure(error.message))
+      setErrorMessage(error.message);
+      setLoading(false);
     }
   };
   return (
     <div className='min-h-screen mt-20'>
       <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+
         <div className='flex-1'>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div>
@@ -84,7 +84,7 @@ export default function SignUp() {
                 'Sign Up'
               )}
             </Button>
-            <OAuth/>
+            <OAuth />
           </form>
           <div className='flex gap-2 text-sm mt-5'>
             <span>Have an account?</span>
@@ -100,5 +100,5 @@ export default function SignUp() {
         </div>
       </div>
     </div>
-  )
+  );
 }

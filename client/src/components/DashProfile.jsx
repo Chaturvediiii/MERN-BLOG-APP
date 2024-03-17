@@ -36,7 +36,6 @@ export default function DashProfile() {
   const [formData, setFormData] = useState({});
   const filePickerRef = useRef();
   const dispatch = useDispatch();
-  
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -51,6 +50,7 @@ export default function DashProfile() {
   }, [imageFile]);
 
   const uploadImage = async () => {
+    
     setImageFileUploading(true);
     setImageFileUploadError(null);
     const storage = getStorage(app);
