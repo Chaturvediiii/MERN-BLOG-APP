@@ -86,6 +86,8 @@ export default function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('postid',formData._id);
+      console.log('userid',currentUser._id);
       const res = await fetch(`/api/post/updatepost/${formData._id}/${currentUser._id}`, {
         method: 'PUT',
         headers: {
@@ -119,13 +121,13 @@ export default function UpdatePost() {
             id='title'
             className='flex-1'
             onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
+              setFormData({ ...formData,_id: postId, title: e.target.value })
             }
             value={formData.title}
           />
           <Select
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData({ ...formData,_id: postId, category: e.target.value })
             }
             value={formData.category}
           >
@@ -176,7 +178,7 @@ export default function UpdatePost() {
           className='h-72 mb-12'
           required
           onChange={(value) => {
-            setFormData({ ...formData, content: value });
+            setFormData({ ...formData,_id: postId, content: value });
           }}
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>
