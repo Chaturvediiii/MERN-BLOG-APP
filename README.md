@@ -21,4 +21,4 @@ This is a MERN (MongoDB, Express.js, React.js, Node.js) stack application for a 
 - **Bootstrap**: CSS framework for styling the frontend.
 
 ## Deployed link
-[Click to see this blog app](https://blog-app-mern-tlkf.onrender.com/)
+[Click to see this blog app](https://blogapp-mern-976p.onrender.com/)
