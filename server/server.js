@@ -10,7 +10,7 @@ import commentRoutes from './routes/comment.route.js'
 import cookieParser from 'cookie-parser';
 import path from 'path'
 
-const PORT = process.env.PORT
+const PORT = 3000
 
 mongoose
 .connect(process.env.MONGODB_URL)
